@@ -1,394 +1,873 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zero to 1 Crore in 150 Days</title>
-
-<!-- FONTS & ICONS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-:root{
-  --bg:#05060a;
-  --card:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
-  --text:#ffffff;
-  --muted:#9aa0b4;
-  --grad:linear-gradient(135deg,#7f5cff,#5ce1ff,#9bffac);
-  --glow:0 0 60px rgba(92,225,255,.45);
-}
-
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Inter',sans-serif;
-  background:#05060a;
-  color:var(--text);
-  overflow-x:hidden;
-}
-
-/* BACKGROUND */
-.bg{
-  position:fixed;inset:0;z-index:-1;
-  background:
-    radial-gradient(circle at 20% 20%,#7f5cff55,transparent 40%),
-    radial-gradient(circle at 80% 70%,#5ce1ff55,transparent 40%);
-}
-
-/* GLOBAL */
-.container{max-width:1200px;margin:auto;padding:0 20px}
-section{padding:110px 0}
-
-/* NAV */
-nav{
-  position:fixed;top:0;width:100%;
-  backdrop-filter:blur(18px);
-  background:rgba(5,6,10,.7);
-  border-bottom:1px solid var(--border);
-  z-index:999;
-}
-.nav{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 0;
-}
-.logo{
-  font-size:1.6rem;font-weight:900;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.nav a{color:var(--muted);margin-left:26px;text-decoration:none}
-
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;align-items:center;
-  text-align:center;
-  padding-top:130px;
-}
-.hero img{
-  width:250px;
-  border-radius:24px;
-  box-shadow:var(--glow);
-  transition:.15s;
-}
-.hero h1{
-  font-size:clamp(2.8rem,6vw,5rem);
-  font-weight:900;
-  margin:30px 0 20px;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.hero p{
-  color:var(--muted);
-  max-width:650px;
-  margin:auto;
-}
-
-/* BUTTON */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:18px 50px;
-  border-radius:60px;
-  font-weight:900;
-  background:var(--grad);
-  color:#000;
-  margin-top:35px;
-  box-shadow:var(--glow);
-  text-decoration:none;
-  animation:pulse 2s infinite;
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 rgba(92,225,255,0)}
-  70%{box-shadow:0 0 40px rgba(92,225,255,.7)}
-  100%{box-shadow:0 0 0 rgba(92,225,255,0)}
-}
-
-/* TIMER */
-.timer{
-  display:flex;justify-content:center;gap:20px;margin-top:35px
-}
-.time{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:16px 22px;
-  border-radius:16px;
-}
-.time h3{font-size:1.7rem}
-.time span{font-size:.75rem;color:var(--muted)}
-
-/* STATS */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-}
-.stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:36px;
-  text-align:center;
-}
-.stat h2{
-  font-size:3rem;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* FEATURES */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:36px;
-  backdrop-filter:blur(20px);
-  transition:.4s;
-  transform-style:preserve-3d;
-}
-.card:hover{
-  transform:translateY(-14px) rotateX(7deg);
-  box-shadow:var(--glow);
-}
-.icon{
-  width:64px;height:64px;
-  border-radius:18px;
-  background:var(--grad);
-  display:flex;align-items:center;justify-content:center;
-  color:#000;font-size:1.6rem;margin-bottom:18px;
-}
-
-/* FEEDBACK */
-.feedback{overflow:hidden;margin-top:50px}
-.track{
-  display:flex;gap:25px;
-  animation:scroll 13s linear infinite;
-}
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-.feed{
-  min-width:320px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:26px;
-}
-.stars{color:#ffd23f}
-
-/* SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(40px);transition:1s}
-.reveal.active{opacity:1;transform:none}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:30px;left:30px;
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:16px 22px;
-  border-radius:14px;
-  backdrop-filter:blur(20px);
-  display:none;
-  z-index:9999;
-}
-
-/* WHATSAPP */
-.wa{
-  position:fixed;
-  right:30px;bottom:30px;
-  width:60px;height:60px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;
-  box-shadow:0 0 30px #25D366aa;
-  z-index:9999;
-}
-
-/* EXIT POPUP */
-.exit{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:10000;
-}
-.exit-box{
-  background:#0c0f1f;
-  border:1px solid var(--border);
-  padding:40px;
-  border-radius:26px;
-  text-align:center;
-  max-width:420px;
-}
-
-footer{
-  padding:40px 0;
-  border-top:1px solid var(--border);
-  text-align:center;
-  color:var(--muted);
-}
-
-@media(max-width:768px){
-  nav a{display:none}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero to 1 Crore in 150 Days | Himanshu Chauhan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --prime:#ff6b35;        /* Hyperbound orange */
+      --second:#f7931e;       /* Orange gradient */
+      --accent:#4ade80;       /* Hyperbound green */
+      --dark:#0a0a0b;         /* Deep black */
+      --darker:#0a0a0b;       /* Background */
+      --card-bg:rgba(26,26,26,0.6); /* Glass card */
+      --light:#ffffff;        /* White text */
+      --grey:#a1a1a1;        /* Muted text */
+      --shadow:0 25px 50px rgba(0,0,0,0.5);
+      --shadow-hover:0 30px 60px rgba(255,107,53,0.2);
+      --radius:20px;
+      --glass:blur(12px) saturate(180%);
+    }
+    
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      transform-style:preserve-3d;
+    }
+    
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--darker);
+      color:var(--light);
+      overflow-x:hidden;
+      transition:background 0.3s;
+    }
+    
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+    
+    section{
+      padding:120px 0;
+      position:relative;
+    }
+    
+    /* Animated Background */
+    .bg-animate{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+      background:radial-gradient(circle at 10% 20%,rgba(255,107,53,0.05) 0%,transparent 30%),
+                 radial-gradient(circle at 90% 80%,rgba(74,222,128,0.05) 0%,transparent 30%);
+      animation:bgPulse 15s ease-in-out infinite;
+    }
+    
+    @keyframes bgPulse{
+      0%,100%{transform:scale(1);}
+      50%{transform:scale(1.05);}
+    }
+    
+    /* Navigation */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:rgba(10,10,11,0.7);
+      backdrop-filter:var(--glass);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      z-index:1000;
+      padding:20px 0;
+      transition:all 0.3s;
+    }
+    
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    
+    .logo{
+      font-family:'Playfair Display',serif;
+      font-size:1.8rem;
+      font-weight:900;
+      background:linear-gradient(45deg,var(--prime),var(--accent));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      transition:transform 0.3s;
+    }
+    
+    .logo:hover{
+      transform:scale(1.05) rotateY(5deg);
+    }
+    
+    .nav-links{
+      display:flex;
+      gap:35px;
+    }
+    
+    .nav-links a{
+      color:var(--grey);
+      font-weight:500;
+      transition:all 0.3s;
+      position:relative;
+    }
+    
+    .nav-links a:hover{
+      color:var(--light);
+      transform:translateY(-2px);
+    }
+    
+    .nav-links a::after{
+      content:'';
+      position:absolute;
+      bottom:-5px;
+      left:0;
+      width:0;
+      height:2px;
+      background:var(--prime);
+      transition:width 0.3s;
+    }
+    
+    .nav-links a:hover::after{
+      width:100%;
+    }
+    
+    /* Hero Section */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding-top:120px;
+      perspective:1000px;
+    }
+    
+    .hero-content{
+      transform:translateZ(50px);
+      transition:transform 0.5s;
+    }
+    
+    .hero-content:hover{
+      transform:translateZ(80px) rotateX(2deg);
+    }
+    
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(3rem,8vw,5.5rem);
+      font-weight:900;
+      line-height:1.1;
+      margin-bottom:25px;
+      background:linear-gradient(135deg,var(--light) 0%,var(--prime) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      transform:translateZ(30px);
+      animation:textGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes textGlow{
+      0%{filter:brightness(1);}
+      100%{filter:brightness(1.2);}
+    }
+    
+    .hero p{
+      color:var(--grey);
+      font-size:1.2rem;
+      max-width:650px;
+      margin:0 auto 35px;
+      transform:translateZ(20px);
+    }
+    
+    /* 3D Button */
+    .btn-primary{
+      padding:20px 45px;
+      border-radius:50px;
+      font-size:1.1rem;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      background:linear-gradient(135deg,var(--prime) 0%,var(--second) 100%);
+      color:var(--light);
+      box-shadow:var(--shadow),0 0 30px rgba(255,107,53,0.3);
+      position:relative;
+      overflow:hidden;
+      transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+      transform:translateZ(40px);
+      border:none;
+      cursor:pointer;
+    }
+    
+    .btn-primary::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:linear-gradient(45deg,transparent,rgba(255,255,255,0.4),transparent);
+      transform:rotate(45deg);
+      animation:shine 2.5s infinite;
+    }
+    
+    @keyframes shine{
+      0%{transform:translateX(-100%) translateY(-100%) rotate(45deg);}
+      100%{transform:translateX(100%) translateY(100%) rotate(45deg);}
+    }
+    
+    .btn-primary:hover{
+      transform:translateZ(60px) translateY(-5px) scale(1.05);
+      box-shadow:var(--shadow-hover),0 0 40px rgba(255,107,53,0.5);
+    }
+    
+    /* Trust Badges */
+    .trust-badges{
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      margin-top:50px;
+      flex-wrap:wrap;
+      transform:translateZ(10px);
+    }
+    
+    .badge{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--grey);
+      font-size:0.9rem;
+      background:var(--card-bg);
+      padding:8px 16px;
+      border-radius:20px;
+      backdrop-filter:var(--glass);
+      border:1px solid rgba(255,255,255,0.1);
+      transition:all 0.3s;
+    }
+    
+    .badge:hover{
+      transform:translateY(-3px);
+      border-color:var(--accent);
+    }
+    
+    .badge i{
+      color:var(--accent);
+    }
+    
+    /* Section Titles */
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.5rem,6vw,4rem);
+      text-align:center;
+      margin-bottom:20px;
+      background:linear-gradient(135deg,var(--light) 0%,var(--prime) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    
+    .subtitle{
+      text-align:center;
+      color:var(--grey);
+      margin-bottom:70px;
+      font-size:1.1rem;
+    }
+    
+    /* 3D Grid Cards */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:35px;
+      margin-top:50px;
+    }
+    
+    .card{
+      background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);
+      padding:35px;
+      transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+      backdrop-filter:var(--glass);
+      transform:perspective(1000px) rotateX(0deg) rotateY(0deg);
+      position:relative;
+      overflow:hidden;
+    }
+    
+    .card::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:linear-gradient(135deg,rgba(255,107,53,0.1),transparent);
+      opacity:0;
+      transition:opacity 0.3s;
+      z-index:-1;
+    }
+    
+    .card:hover{
+      transform:perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px) scale(1.02);
+      border-color:var(--prime);
+      box-shadow:var(--shadow-hover);
+    }
+    
+    .card:hover::before{
+      opacity:1;
+    }
+    
+    .card-icon{
+      width:70px;
+      height:70px;
+      background:linear-gradient(135deg,var(--prime),var(--accent));
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.8rem;
+      color:var(--light);
+      margin-bottom:25px;
+      transition:transform 0.3s;
+    }
+    
+    .card:hover .card-icon{
+      transform:scale(1.1) rotateZ(10deg);
+    }
+    
+    .card h3{
+      margin-bottom:15px;
+      font-size:1.2rem;
+      font-weight:600;
+    }
+    
+    .card p{
+      color:var(--grey);
+      font-size:0.95rem;
+      line-height:1.6;
+    }
+    
+    /* Fast Feedback Scroll */
+    .feedback-scroll{
+      position:relative;
+      height:320px;
+      overflow:hidden;
+      margin-top:50px;
+    }
+    
+    .feedback-track{
+      display:flex;
+      gap:30px;
+      animation:scroll 15s linear infinite; /* Faster scroll */
+    }
+    
+    @keyframes scroll{
+      0%{transform:translateX(0);}
+      100%{transform:translateX(-50%);}
+    }
+    
+    .feedback-card{
+      flex:0 0 340px;
+      background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);
+      padding:30px;
+      backdrop-filter:var(--glass);
+      transition:all 0.3s;
+    }
+    
+    .feedback-card:hover{
+      transform:translateY(-5px);
+      border-color:var(--accent);
+    }
+    
+    .feedback-head{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-bottom:15px;
+    }
+    
+    .avatar{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--prime),var(--accent));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      color:var(--light);
+      font-size:1.2rem;
+    }
+    
+    .info strong{
+      font-size:1rem;
+    }
+    
+    .info small{
+      color:var(--grey);
+      font-size:0.8rem;
+    }
+    
+    .stars{
+      color:var(--accent);
+      font-size:0.9rem;
+      margin-bottom:10px;
+    }
+    
+    .feedback-text{
+      font-size:0.9rem;
+      color:var(--grey);
+      line-height:1.6;
+    }
+    
+    /* 3D Stack Cards */
+    .stack-scroll{
+      position:relative;
+      height:650px;
+      margin-top:60px;
+      perspective:1000px;
+    }
+    
+    .stack-card{
+      position:absolute;
+      width:100%;
+      max-width:520px;
+      left:50%;
+      transform:translateX(-50%) translateZ(0);
+      background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:var(--radius);
+      padding:35px;
+      box-shadow:var(--shadow);
+      transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+      backdrop-filter:var(--glass);
+    }
+    
+    .stack-card:nth-child(1){
+      top:0;
+      z-index:4;
+      transform:translateX(-50%) translateZ(60px);
+    }
+    
+    .stack-card:nth-child(2){
+      top:40px;
+      z-index:3;
+      transform:translateX(-50%) translateZ(40px);
+    }
+    
+    .stack-card:nth-child(3){
+      top:80px;
+      z-index:2;
+      transform:translateX(-50%) translateZ(20px);
+    }
+    
+    .stack-card:nth-child(4){
+      top:120px;
+      z-index:1;
+      transform:translateX(-50%) translateZ(0px);
+    }
+    
+    .stack-card:hover{
+      transform:translateX(-50%) translateZ(80px) translateY(-15px);
+      border-color:var(--prime);
+    }
+    
+    .need-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      margin-top:15px;
+      font-size:0.9rem;
+    }
+    
+    .need-grid .yes{
+      color:var(--accent);
+      font-weight:600;
+    }
+    
+    .need-grid .no{
+      color:var(--prime);
+      font-weight:600;
+    }
+    
+    .bonus-list{
+      list-style:none;
+      margin-top:20px;
+      font-size:0.9rem;
+      color:var(--grey);
+    }
+    
+    .bonus-list li{
+      margin-bottom:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      transition:transform 0.2s;
+    }
+    
+    .bonus-list li:hover{
+      transform:translateX(5px);
+      color:var(--light);
+    }
+    
+    /* Floating WhatsApp Button */
+    .wa-float{
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      background:var(--accent);
+      color:var(--dark);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.8rem;
+      box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3);
+      z-index:999;
+      transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+      animation:pulse 2s infinite;
+    }
+    
+    @keyframes pulse{
+      0%{box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3);}
+      50%{box-shadow:var(--shadow),0 0 40px rgba(74,222,128,0.6);}
+      100%{box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3);}
+    }
+    
+    .wa-float:hover{
+      transform:scale(1.15) rotateZ(10deg);
+      animation:none;
+    }
+    
+    /* Footer */
+    footer{
+      background:#111;
+      padding:50px 0;
+      text-align:center;
+      color:var(--grey);
+      font-size:0.9rem;
+    }
+    
+    footer a{
+      color:var(--prime);
+      transition:color 0.3s;
+    }
+    
+    footer a:hover{
+      color:var(--accent);
+    }
+    
+    /* Responsive */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .hero h1{font-size:2.5rem}
+      .grid-3{grid-template-columns:1fr}
+      .need-grid{grid-template-columns:1fr}
+      .btn-primary{padding:16px 35px;font-size:1rem}
+      .feedback-card{flex:0 0 280px}
+    }
+  </style>
 </head>
+<body data-theme="dark">
+  <div class="bg-animate"></div>
 
-<body>
-<div class="bg"></div>
-
-<nav>
-  <div class="container nav">
-    <div class="logo">ZeroTo1Crore</div>
-    <div>
-      <a href="#buy">Buy</a>
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <div class="nav">
+        <div class="logo">ZeroTo1Crore</div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#feedback">Reviews</a>
+          <a href="#stack">Who/Need/Bonus</a>
+          <a href="#cta">Download</a>
+        </div>
+        <div class="nav-cta">
+          <a href="#cta" class="btn-primary">₹299 Only</a>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<section class="hero reveal">
-  <div class="container">
-    <img id="heroImg" src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png">
-    <h1>Zero to 1 Crore<br>in 150 Days</h1>
-    <p>AI-powered execution blueprint to build automated online income.</p>
-
-    <div class="timer">
-      <div class="time"><h3 id="h">00</h3><span>Hours</span></div>
-      <div class="time"><h3 id="m">00</h3><span>Minutes</span></div>
-      <div class="time"><h3 id="s">00</h3><span>Seconds</span></div>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <img src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png" alt="Zero to 1 Crore Book" style="width:240px;border-radius:20px;margin-bottom:25px;box-shadow:var(--shadow);transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05) rotateY(5deg)'" onmouseout="this.style.transform='scale(1) rotateY(0deg)'">
+        <h1>Zero to 1 Crore<br>in 150 Days</h1>
+        <p>The ultimate step-by-step blueprint to build your online empire from scratch. No experience, no big budget—just proven systems that print money.</p>
+        <div class="hero-cta">
+          <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="btn-primary track-wa">
+            <i class="fab fa-whatsapp"></i>
+            Buy Now - ₹299
+          </a>
+        </div>
+        <div class="trust-badges">
+          <div class="badge"><i class="fas fa-check-circle"></i> Instant PDF</div>
+          <div class="badge"><i class="fas fa-check-circle"></i> 210+ Scripts</div>
+          <div class="badge"><i class="fas fa-check-circle"></i> 24-hr Refund</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <a id="buy" class="btn" href="https://wa.me/917258055245">
-      <i class="fab fa-whatsapp"></i> Buy @ ₹299
-    </a>
-  </div>
-</section>
-
-<section class="reveal">
-  <div class="container stats">
-    <div class="stat"><h2 data-count="150">0</h2><p>Day Roadmap</p></div>
-    <div class="stat"><h2 data-count="20">0</h2><p>Income Models</p></div>
-    <div class="stat"><h2 data-count="210">0</h2><p>Scripts</p></div>
-    <div class="stat"><h2 data-count="100">0</h2><p>% Practical</p></div>
-  </div>
-</section>
-
-<section class="reveal">
-  <div class="container grid">
-    <div class="card"><div class="icon"><i class="fas fa-rocket"></i></div><h3>Income Systems</h3><p>Affiliate, AI services, faceless content.</p></div>
-    <div class="card"><div class="icon"><i class="fas fa-brain"></i></div><h3>AI Automation</h3><p>Done-for-you prompts & workflows.</p></div>
-    <div class="card"><div class="icon"><i class="fas fa-mobile"></i></div><h3>Mobile First</h3><p>Execute everything from phone.</p></div>
-  </div>
-</section>
-
-<section class="reveal">
-  <div class="container feedback">
-    <div class="track">
-      <div class="feed"><div class="stars">★★★★★</div>₹11,500 in 14 days</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹1.2L/month side income</div>
-      <div class="feed"><div class="stars">★★★★★</div>Faceless channel success</div>
-      <div class="feed"><div class="stars">★★★★★</div>AI services 5x pricing</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹1L in 90 days</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹11,500 in 14 days</div>
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">What’s Inside?</h2>
+      <p class="subtitle">Everything you need to hit ₹1 crore in 150 days</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-rocket"></i></div>
+          <h3>20+ Income Streams</h3>
+          <p>Affiliate, YouTube, POD, KDP, SaaS resell, AI services—step-by-step.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-brain"></i></div>
+          <h3>AI Automation</h3>
+          <p>Done-for-you prompts & tools that run 80% of your business on autopilot.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Mobile First</h3>
+          <p>Build everything from your phone. No laptop, no team, no capital.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-© 2024 ZeroTo1Crore · WhatsApp 7258055245
-</footer>
+  <!-- FEEDBACK SCROLL -->
+  <section id="feedback">
+    <div class="container">
+      <h2 class="section-title">Reader Results</h2>
+      <p class="subtitle">Real feedback from early buyers</p>
+      <div class="feedback-scroll">
+        <div class="feedback-track">
+          <!-- 13 feedback cards -->
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Ankit Sharma</strong><small>Student, 19</small></div></div>
+            <div class="feedback-text">"Day 14 me hi first ₹11,500 affiliate sale close ho gaya. WhatsApp scripts kaam kar gaye!"</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">P</div><div class="info"><strong>Priya Patel</strong><small>Freelancer, 24</small></div></div>
+            <div class="feedback-text">"YouTube automation chapter ne 30 din me 52k views + ₹27k AdSense. Faceless channel live!"</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">R</div><div class="info"><strong>Rahul Verma</strong><small>9-5 Employee, 28</small></div></div>
+            <div class="feedback-text">"Side hustle ab ₹1.2L/month. 150-day planner ne discipline pakka kar diya."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">S</div><div class="info"><strong>Sneha Singh</strong><small>Creator, 22</small></div></div>
+            <div class="feedback-text">"KDP + POD combo = ₹89k in 60 days. Bina face dikhaye income ho rahi hai."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">N</div><div class="info"><strong>Nitin Gupta</strong><small>Solopreneur, 31</small></div></div>
+            <div class="feedback-text">"AI services chapter ne client rate 5x kar diya. Same effort, 5x money."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">K</div><div class="info"><strong>Kavita Desai</strong><small>Housewife, 35</small></div></div>
+            <div class="feedback-text">"Mobile se hi ₹45k first month. Bacche sote hi kaam shuru. Freedom milegi!"</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">M</div><div class="info"><strong>Manish Joshi</strong><small>Student, 21</small></div></div>
+            <div class="feedback-text">"Affiliate + email combo = ₹78k in 45 days. Scripts copy-paste kaam kar gaye."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">T</div><div class="info"><strong>Tanya Malik</strong><small>Freelancer, 26</small></div></div>
+            <div class="feedback-text">"Print-on-demand ne ₹1.1L in 50 days. Designs bina face ke viral ho gaye."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Arjun Reddy</strong><small>Job Person, 29</small></div></div>
+            <div class="feedback-text">"Side income now exceeds salary. Resignation letter ready hai!"</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">D</div><div class="info"><strong>Diya Kapoor</strong><small>Creator, 23</small></div></div>
+            <div class="feedback-text">"Newsletter monetization = ₹62k monthly. 2,400 subscribers in 60 days!"</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">V</div><div class="info"><strong>Vikram Sethi</strong><small>Business Owner, 33</small></div></div>
+            <div class="feedback-text">"AI automation saved 20 hours/week. Same revenue, zero burnout."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">P</div><div class="info"><strong>Pooja Bansal</strong><small>Student, 20</small></div></div>
+            <div class="feedback-text">"First ₹1 lakh in 90 days. Parents ko bharosa ho gaya online earning pe."</div>
+          </div>
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">R</div><div class="info"><strong>Rohan Mehta</strong><small>Solopreneur, 27</small></div></div>
+            <div class="feedback-text">"Multiple streams now = ₹2.3L/month. 150-day roadmap followed exactly."</div>
+          </div>
+          <!-- duplicate for infinite scroll -->
+          <div class="feedback-card">
+            <div class="stars">★★★★★</div>
+            <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Ankit Sharma</strong><small>Student, 19</small></div></div>
+            <div class="feedback-text">"Day 14 me hi first ₹11,500 affiliate sale close ho gaya. WhatsApp scripts kaam kar gaye!"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="toast" id="toast">🔥 Someone from Delhi just bought</div>
+  <!-- Who/Need/Bonus Sections -->
+  <section id="who">
+    <div class="container">
+      <h2 class="section-title">Who This Is For</h2>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon"><i class="fas fa-user-graduate"></i></div><h3>Students</h3><p>Earn without depending on degrees.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-briefcase"></i></div><h3>9-5 Employees</h3><p>Looking for a clear exit plan.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-laptop"></i></div><h3>Freelancers</h3><p>Tired of low-paying clients.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-clock"></i></div><h3>Side Hustlers</h3><p>Ready to go full-time.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-mask"></i></div><h3>Creators</h3><p>Monetize without showing face.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-user-tie"></i></div><h3>Solopreneurs</h3><p>Need repeatable systems for growth.</p></div>
+      </div>
+    </div>
+  </section>
 
-<a class="wa" href="https://wa.me/917258055245">
-  <i class="fab fa-whatsapp"></i>
-</a>
+  <section id="dont">
+    <div class="container">
+      <h2 class="section-title">You DON’T Need</h2>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Fancy Tools</h3><p>Basic phone + free apps = enough.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Paid Ads</h3><p>Organic traffic systems inside.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Funding</h3><p>Start with ₹0 capital.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Big Teams</h3><p>Solo friendly – AI + automation.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Followers</h3><p>Zero audience needed.</p></div>
+      </div>
+    </div>
+  </section>
 
-<div class="exit" id="exit">
-  <div class="exit-box">
-    <h2>Wait! Don’t Miss This 🔥</h2>
-    <p>₹299 price expires today.</p>
-    <a class="btn" href="https://wa.me/917258055245">Buy Now</a>
-  </div>
-</div>
+  <section id="only">
+    <div class="container">
+      <h2 class="section-title">You ONLY Need</h2>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>Focus</h3><p>1 hour daily implementation.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>A Smartphone</h3><p>Or any basic laptop.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>This Roadmap</h3><p>Step-by-step system inside.</p></div>
+      </div>
+    </div>
+  </section>
 
-<script>
-// PARALLAX
-document.addEventListener("mousemove",e=>{
-  const img=document.getElementById("heroImg");
-  img.style.transform=`rotateY(${(window.innerWidth/2-e.clientX)/35}deg)
-  rotateX(${(window.innerHeight/2-e.clientY)/35}deg)`;
-});
+  <section id="different">
+    <div class="container">
+      <h2 class="section-title">Why This Book Is DIFFERENT</h2>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon"><i class="fas fa-star"></i></div><h3>100% Strategy + Execution</h3><p>Each chapter = mini course.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-tools"></i></div><h3>Ready-to-Use Tools</h3><p>Copy-paste templates inside.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-map"></i></div><h3>Plug-and-Play Maps</h3><p>Action planners included.</p></div>
+      </div>
+    </div>
+  </section>
 
-// TIMER
-function timer(){
-  const now=new Date();
-  const end=new Date();end.setHours(24,0,0,0);
-  const d=end-now;
-  h.innerText=Math.floor(d/3600000);
-  m.innerText=Math.floor(d/60000)%60;
-  s.innerText=Math.floor(d/1000)%60;
-}
-setInterval(timer,1000);timer();
+  <section id="bonus">
+    <div class="container">
+      <h2 class="section-title">BONUS PACK (LIMITED TIME ONLY)</h2>
+      <ul class="bonus-list">
+        <li>🎁 Execution Toolkit Vault</li>
+        <li>🎁 150-Day Business Planner (Printable PDF)</li>
+        <li>🎁 Money Mindset Journal Template</li>
+        <li>🎁 Cold DM & Sales Scripts (Proven to convert!)</li>
+        <li>🎁 ₹0-to-₹1L Launch Tracker (Notion dashboard)</li>
+        <li>🎁 Business Model Chooser (AI-powered)</li>
+      </ul>
+      <div style="text-align:center;margin-top:40px">
+        <a href="#cta" class="btn-primary">Claim Bonuses - ₹299</a>
+      </div>
+    </div>
+  </section>
 
-// COUNTERS
-document.querySelectorAll('[data-count]').forEach(el=>{
-  let i=0,t=+el.dataset.count;
-  const o=new IntersectionObserver(e=>{
-    if(e[0].isIntersecting){
-      const int=setInterval(()=>{
-        i++;el.innerText=i;
-        if(i>=t)clearInterval(int);
-      },20);
-      o.disconnect();
-    }
-  });
-  o.observe(el);
-});
+  <section id="promise">
+    <div class="container">
+      <h2 class="section-title">THE PROMISE</h2>
+      <p class="subtitle">If you read & implement 1 hour/day, you WILL:</p>
+      <div class="grid-3">
+        <div class="card"><div class="card-icon"><i class="fas fa-rocket"></i></div><h3>Launch First Business</h3><p>Within 30 days.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-sync"></i></div><h3>Build Recurring Income</h3><p>Monthly cashflow systems.</p></div>
+        <div class="card"><div class="card-icon"><i class="fas fa-brain"></i></div><h3>Upgrade Mindset</h3><p>No-excuses mentality.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:40px">
+        <a href="#cta" class="btn-primary">Start Now - ₹299</a>
+      </div>
+    </div>
+  </section>
 
-// SCROLL REVEAL
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll('.reveal').forEach(r=>{
-    if(r.getBoundingClientRect().top < window.innerHeight-80){
-      r.classList.add("active");
-    }
-  });
-});
+  <!-- FINAL CTA -->
+  <section id="cta" class="cta-section">
+    <div class="container">
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);margin-bottom:20px;">Ready to Build Your ₹1 Crore Empire?</h2>
+      <p style="font-size:1.2rem;color:var(--grey);margin-bottom:30px;">Limited copies at ₹299. Price increases to ₹1,999 at midnight.</p>
+      <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="btn-primary track-wa">
+        <i class="fab fa-whatsapp"></i>
+        Buy Now - ₹299
+      </a>
+    </div>
+  </section>
 
-// PURCHASE TOAST
-const cities=["Delhi","Mumbai","Pune","Jaipur","Indore","Surat"];
-setInterval(()=>{
-  const t=document.getElementById("toast");
-  t.innerText=`🔥 Someone from ${cities[Math.floor(Math.random()*cities.length)]} just bought`;
-  t.style.display="block";
-  setTimeout(()=>t.style.display="none",3000);
-},7000);
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="wa-float track-wa">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
-// EXIT INTENT
-let shown=false;
-document.addEventListener("mouseout",e=>{
-  if(e.clientY<10 && !shown){
-    shown=true;
-    document.getElementById("exit").style.display="flex";
-  }
-});
-</script>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Hifzurrahman. All rights reserved. | WhatsApp Support: <a href="https://wa.me/917258055245">7258055245</a></p>
+    </div>
+  </footer>
 
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+    
+    // Auto redirect after 7 seconds
+    setTimeout(()=>{
+      window.open('https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link.','_blank');
+    },7000);
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll',()=>{
+      const nav=document.querySelector('nav');
+      if(window.scrollY>100){
+        nav.style.background='rgba(10,10,11,0.9)';
+        nav.style.backdropFilter='blur(20px)';
+      }else{
+        nav.style.background='rgba(10,10,11,0.7)';
+      }
+    });
+    
+    // 3D tilt effect for cards
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('mousemove',(e)=>{
+        const rect=card.getBoundingClientRect();
+        const x=e.clientX-rect.left;
+        const y=e.clientY-rect.top;
+        const centerX=rect.width/2;
+        const centerY=rect.height/2;
+        const rotateX=(y-centerY)/10;
+        const rotateY=(centerX-x)/10;
+        card.style.transform=`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+      
+      card.addEventListener('mouseleave',()=>{
+        card.style.transform='perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    });
+  </script>
 </body>
 </html>
