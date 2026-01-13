@@ -10,307 +10,275 @@
 
 <style>
 :root{
-  --bg:#05060a;
-  --card:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
-  --text:#ffffff;
-  --muted:#9aa0b4;
-  --grad:linear-gradient(135deg,#7f5cff,#5ce1ff,#9bffac);
-  --glow:0 0 45px rgba(92,225,255,.35);
+ --bg:#05060a;
+ --card:rgba(255,255,255,0.06);
+ --border:rgba(255,255,255,0.12);
+ --text:#fff;
+ --muted:#9aa0b4;
+ --grad:linear-gradient(135deg,#7f5cff,#5ce1ff,#9bffac);
+ --glow:0 0 50px rgba(92,225,255,.4);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:'Inter',sans-serif;
-  background:radial-gradient(circle at top,#0c0f1f,#05060a 70%);
-  color:var(--text);
-  overflow-x:hidden;
+ font-family:'Inter',sans-serif;
+ background:#05060a;
+ color:var(--text);
+ overflow-x:hidden;
 }
 
-/* BACKGROUND GLOW */
-.bg{
-  position:fixed;inset:0;
-  background:
-    radial-gradient(circle at 20% 20%,#7f5cff35,transparent 40%),
-    radial-gradient(circle at 80% 70%,#5ce1ff35,transparent 40%);
-  z-index:-1;
+/* BACKGROUND VIDEO */
+.bg-video{
+ position:fixed;
+ inset:0;
+ z-index:-2;
+ object-fit:cover;
+ opacity:.18;
+}
+
+/* GRADIENT OVERLAY */
+.overlay{
+ position:fixed;inset:0;
+ background:
+  radial-gradient(circle at 20% 20%,#7f5cff55,transparent 45%),
+  radial-gradient(circle at 80% 70%,#5ce1ff55,transparent 45%);
+ z-index:-1;
 }
 
 /* GLOBAL */
 .container{max-width:1200px;margin:auto;padding:0 20px}
-section{padding:100px 0}
+section{padding:110px 0}
 
 /* NAV */
 nav{
-  position:fixed;top:0;width:100%;
-  backdrop-filter:blur(16px);
-  background:rgba(5,6,10,.6);
-  border-bottom:1px solid var(--border);
-  z-index:999;
+ position:fixed;top:0;width:100%;
+ backdrop-filter:blur(16px);
+ background:rgba(5,6,10,.7);
+ border-bottom:1px solid var(--border);
+ z-index:999;
 }
 .nav{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 0;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 0;
 }
 .logo{
-  font-size:1.6rem;font-weight:900;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+ font-size:1.6rem;font-weight:900;
+ background:var(--grad);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
 .nav a{color:var(--muted);margin-left:26px}
-.nav a:hover{color:#fff}
 
 /* HERO */
 .hero{
-  min-height:100vh;
-  display:flex;align-items:center;text-align:center;
-  padding-top:120px;
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ text-align:center;
+ padding-top:130px;
 }
 .hero img{
-  width:240px;border-radius:22px;
-  box-shadow:var(--glow);
-  transition:transform .15s;
+ width:250px;
+ border-radius:24px;
+ box-shadow:var(--glow);
+ transition:.15s;
 }
 .hero h1{
-  font-size:clamp(2.8rem,6vw,4.8rem);
-  font-weight:900;margin:30px 0 20px;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+ font-size:clamp(2.8rem,6vw,5rem);
+ font-weight:900;
+ margin:30px 0 20px;
+ background:var(--grad);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
 .hero p{color:var(--muted);max-width:650px;margin:auto}
 
-/* BUTTON */
+/* CTA */
 .btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:18px 46px;border-radius:50px;
-  font-weight:800;background:var(--grad);
-  color:#000;margin-top:35px;
-  box-shadow:var(--glow);
-  transition:.35s;
+ display:inline-flex;
+ align-items:center;
+ gap:10px;
+ padding:18px 50px;
+ border-radius:60px;
+ font-weight:900;
+ background:var(--grad);
+ color:#000;
+ margin-top:35px;
+ box-shadow:var(--glow);
+ animation:pulse 2s infinite;
 }
-.btn:hover{transform:translateY(-5px) scale(1.05)}
-
-/* COUNTDOWN */
-.timer{
-  display:flex;justify-content:center;gap:20px;
-  margin-top:40px;
+@keyframes pulse{
+ 0%{box-shadow:0 0 0 rgba(92,225,255,0)}
+ 70%{box-shadow:0 0 40px rgba(92,225,255,.6)}
+ 100%{box-shadow:0 0 0 rgba(92,225,255,0)}
 }
-.time-box{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:16px 22px;border-radius:16px;
-  min-width:80px;
-}
-.time-box h3{font-size:1.6rem}
-.time-box span{font-size:.75rem;color:var(--muted)}
 
 /* STATS */
 .stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:30px;
 }
 .stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:34px;text-align:center;
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:24px;
+ padding:36px;
+ text-align:center;
 }
 .stat h2{
-  font-size:2.8rem;
-  background:var(--grad);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.stat p{color:var(--muted)}
-
-/* CARDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:36px;
-  backdrop-filter:blur(20px);
-  transform-style:preserve-3d;
-  transition:.4s;
-}
-.card:hover{
-  transform:translateY(-14px) rotateX(7deg);
-  box-shadow:var(--glow);
-}
-.icon{
-  width:64px;height:64px;
-  border-radius:18px;
-  background:var(--grad);
-  display:flex;align-items:center;justify-content:center;
-  color:#000;font-size:1.6rem;margin-bottom:18px;
+ font-size:3rem;
+ background:var(--grad);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
 
-/* FEEDBACK */
-.feedback{overflow:hidden;margin-top:50px}
-.track{
-  display:flex;gap:25px;
-  animation:scroll 14s linear infinite;
+/* FEEDBACK TOAST */
+.toast{
+ position:fixed;
+ bottom:30px;
+ left:30px;
+ background:var(--card);
+ border:1px solid var(--border);
+ padding:16px 22px;
+ border-radius:14px;
+ backdrop-filter:blur(20px);
+ display:none;
+ z-index:9999;
 }
-@keyframes scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-.feed{
-  min-width:320px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:26px;
-}
-.stars{color:#ffd23f}
 
-/* SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(40px);transition:1s}
-.reveal.active{opacity:1;transform:none}
+/* WHATSAPP FLOAT */
+.wa-float{
+ position:fixed;
+ right:30px;
+ bottom:30px;
+ background:#25D366;
+ color:#fff;
+ width:60px;
+ height:60px;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:1.8rem;
+ box-shadow:0 0 30px #25D366aa;
+ z-index:9999;
+}
 
-/* CTA */
-.cta{text-align:center}
-footer{
-  padding:40px 0;border-top:1px solid var(--border);
-  text-align:center;color:var(--muted);
+/* EXIT POPUP */
+.exit{
+ position:fixed;inset:0;
+ background:rgba(0,0,0,.7);
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:10000;
+}
+.exit-box{
+ background:#0c0f1f;
+ border:1px solid var(--border);
+ padding:40px;
+ border-radius:26px;
+ text-align:center;
+ max-width:420px;
 }
 
 @media(max-width:768px){
-  nav a{display:none}
+ nav a{display:none}
 }
 </style>
 </head>
 
 <body>
-<div class="bg"></div>
+
+<!-- VIDEO BG -->
+<video class="bg-video" autoplay muted loop playsinline>
+ <source src="https://cdn.coverr.co/videos/coverr-ai-network-technology-8295/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
 
 <nav>
-  <div class="container nav">
-    <div class="logo">ZeroTo1Crore</div>
-    <div>
-      <a href="#features">Features</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#buy">Buy</a>
-    </div>
+ <div class="container nav">
+  <div class="logo">ZeroTo1Crore</div>
+  <div>
+   <a href="#buy">Buy</a>
   </div>
+ </div>
 </nav>
 
-<section class="hero reveal">
-  <div class="container">
-    <img id="heroImg" src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png">
-    <h1>Zero to 1 Crore<br>in 150 Days</h1>
-    <p>AI-powered execution roadmap to build automated online income.</p>
+<section class="hero">
+ <div class="container">
+  <img id="heroImg" src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png">
+  <h1>Zero to 1 Crore<br>in 150 Days</h1>
+  <p>AI powered execution blueprint used by modern solopreneurs.</p>
 
-    <!-- TIMER -->
-    <div class="timer">
-      <div class="time-box"><h3 id="h">00</h3><span>Hours</span></div>
-      <div class="time-box"><h3 id="m">00</h3><span>Minutes</span></div>
-      <div class="time-box"><h3 id="s">00</h3><span>Seconds</span></div>
-    </div>
-
-    <a id="buy" class="btn" href="https://wa.me/917258055245">
-      <i class="fab fa-whatsapp"></i> Buy @ ₹299
-    </a>
-  </div>
+  <a id="buy" class="btn" href="https://wa.me/917258055245">
+   <i class="fab fa-whatsapp"></i> Buy @ ₹299
+  </a>
+ </div>
 </section>
 
-<section class="reveal">
-  <div class="container stats">
-    <div class="stat"><h2 data-count="150">0</h2><p>Day Roadmap</p></div>
-    <div class="stat"><h2 data-count="20">0</h2><p>Income Models</p></div>
-    <div class="stat"><h2 data-count="210">0</h2><p>Scripts & Systems</p></div>
-    <div class="stat"><h2 data-count="100">0</h2><p>% Practical</p></div>
-  </div>
-</section>
-
-<section id="features" class="reveal">
-  <div class="container grid">
-    <div class="card"><div class="icon"><i class="fas fa-rocket"></i></div><h3>Income Systems</h3><p>Affiliate, AI services, faceless content.</p></div>
-    <div class="card"><div class="icon"><i class="fas fa-brain"></i></div><h3>AI Automation</h3><p>Done-for-you prompts & tools.</p></div>
-    <div class="card"><div class="icon"><i class="fas fa-mobile"></i></div><h3>Mobile First</h3><p>Execute everything from phone.</p></div>
-  </div>
-</section>
-
-<section id="reviews" class="reveal">
-  <div class="container feedback">
-    <div class="track">
-      <div class="feed"><div class="stars">★★★★★</div>₹11,500 in 14 days</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹1.2L/month side income</div>
-      <div class="feed"><div class="stars">★★★★★</div>Faceless channel success</div>
-      <div class="feed"><div class="stars">★★★★★</div>AI services 5x pricing</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹1L in 90 days</div>
-      <div class="feed"><div class="stars">★★★★★</div>₹11,500 in 14 days</div>
-    </div>
-  </div>
-</section>
-
-<section class="cta reveal">
-  <div class="container">
-    <h2>Ready to Build Your ₹1 Crore Empire?</h2>
-    <p>Limited price · Instant WhatsApp access</p>
-    <a class="btn" href="https://wa.me/917258055245">
-      <i class="fab fa-whatsapp"></i> Buy Now ₹299
-    </a>
-  </div>
+<section>
+ <div class="container stats">
+  <div class="stat"><h2 data-count="150">0</h2><p>Day Roadmap</p></div>
+  <div class="stat"><h2 data-count="20">0</h2><p>Income Models</p></div>
+  <div class="stat"><h2 data-count="210">0</h2><p>Scripts</p></div>
+  <div class="stat"><h2 data-count="100">0</h2><p>% Practical</p></div>
+ </div>
 </section>
 
 <footer>
-© 2024 ZeroTo1Crore · WhatsApp Support 7258055245
+ © 2024 ZeroTo1Crore · WhatsApp 7258055245
 </footer>
+
+<div class="toast" id="toast">🔥 Someone from Delhi just bought</div>
+
+<a class="wa-float" href="https://wa.me/917258055245">
+ <i class="fab fa-whatsapp"></i>
+</a>
+
+<div class="exit" id="exit">
+ <div class="exit-box">
+  <h2>Wait! Don’t Miss This 🔥</h2>
+  <p>₹299 price expires today.</p>
+  <a class="btn" href="https://wa.me/917258055245">Buy Now</a>
+ </div>
+</div>
 
 <script>
 // PARALLAX
 document.addEventListener("mousemove",e=>{
-  const img=document.getElementById("heroImg");
-  const x=(window.innerWidth/2-e.clientX)/40;
-  const y=(window.innerHeight/2-e.clientY)/40;
-  img.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+ const img=document.getElementById("heroImg");
+ img.style.transform=`rotateY(${(window.innerWidth/2-e.clientX)/35}deg)
+ rotateX(${(window.innerHeight/2-e.clientY)/35}deg)`;
 });
-
-// COUNTDOWN TO MIDNIGHT
-function timer(){
-  const now=new Date();
-  const end=new Date();
-  end.setHours(24,0,0,0);
-  const diff=end-now;
-  document.getElementById("h").innerText=Math.floor(diff/3600000);
-  document.getElementById("m").innerText=Math.floor(diff/60000)%60;
-  document.getElementById("s").innerText=Math.floor(diff/1000)%60;
-}
-setInterval(timer,1000);timer();
 
 // COUNTER
 document.querySelectorAll('[data-count]').forEach(el=>{
-  let started=false;
-  const obs=new IntersectionObserver(entries=>{
-    if(entries[0].isIntersecting && !started){
-      started=true;
-      let i=0,target=+el.dataset.count;
-      const int=setInterval(()=>{
-        i++;el.innerText=i;
-        if(i>=target)clearInterval(int);
-      },20);
-    }
-  });
-  obs.observe(el);
+ let i=0,t=+el.dataset.count;
+ const int=setInterval(()=>{
+  i++;el.innerText=i;
+  if(i>=t)clearInterval(int);
+ },20);
 });
 
-// SCROLL REVEAL
-const reveals=document.querySelectorAll('.reveal');
-window.addEventListener('scroll',()=>{
-  reveals.forEach(r=>{
-    if(r.getBoundingClientRect().top < window.innerHeight-80){
-      r.classList.add('active');
-    }
-  });
+// PURCHASE TOAST
+const cities=["Delhi","Mumbai","Pune","Jaipur","Indore","Surat"];
+setInterval(()=>{
+ const t=document.getElementById("toast");
+ t.innerText=`🔥 Someone from ${cities[Math.floor(Math.random()*cities.length)]} just bought`;
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",3000);
+},7000);
+
+// EXIT INTENT
+let shown=false;
+document.addEventListener("mouseout",e=>{
+ if(e.clientY<10 && !shown){
+  shown=true;
+  document.getElementById("exit").style.display="flex";
+ }
 });
 </script>
 
