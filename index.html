@@ -7,137 +7,640 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root{
-      --prime:#ff6b35;--second:#f7931e;--accent:#4ade80;--dark:#0a0a0b;--darker:#0a0a0b;--card-bg:rgba(26,26,26,0.6);--light:#ffffff;--grey:#a1a1a1;--shadow:0 25px 50px rgba(0,0,0,0.5);--shadow-hover:0 30px 60px rgba(255,107,53,0.2);--radius:20px;--glass:blur(12px) saturate(180%);
+    /* ====== FUTURISTIC DARK THEME ====== */
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: rgba(0, 0, 0, 0.7);
+      --neon-green: #39FF14;
+      --cyber-teal: #00FFFF;
+      --glass-bg: rgba(20, 20, 20, 0.25);
+      --glass-border: 1px solid rgba(57, 255, 20, 0.2);
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --shadow-neon: 0 0 20px rgba(57, 255, 20, 0.3);
+      --shadow-teal: 0 0 20px rgba(0, 255, 255, 0.2);
+      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
-    *{margin:0;padding:0;box-sizing:border-box;transform-style:preserve-3d}
-    body{font-family:'Inter',sans-serif;background:var(--darker);color:var(--light);overflow-x:hidden;line-height:1.5}
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-    section{padding:80px 0;position:relative}
-    .bg-animate{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;background:radial-gradient(circle at 10% 20%,rgba(255,107,53,0.05) 0%,transparent 30%),radial-gradient(circle at 90% 80%,rgba(74,222,128,0.05) 0%,transparent 30%);animation:bgPulse 15s ease-in-out infinite}
-    @keyframes bgPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-    nav{position:fixed;top:0;width:100%;background:rgba(10,10,11,0.7);backdrop-filter:var(--glass);border-bottom:1px solid rgba(255,255,255,0.1);z-index:1000;padding:15px 0;transition:all 0.3s}
-    .nav{display:flex;justify-content:space-between;align-items:center}
-    .logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;background:linear-gradient(45deg,var(--prime),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;transition:transform 0.3s}
-    .logo:hover{transform:scale(1.05) rotateY(5deg)}
-    .nav-links{display:flex;gap:30px}
-    .nav-links a{color:var(--grey);font-weight:500;transition:all 0.3s;position:relative}
-    .nav-links a:hover{color:var(--light);transform:translateY(-2px)}
-    .nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--prime);transition:width 0.3s}
-    .nav-links a:hover::after{width:100%}
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;perspective:1000px}
-    .hero-content{transform:translateZ(50px);transition:transform 0.5s}
-    .hero-content:hover{transform:translateZ(80px) rotateX(2deg)}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,7vw,5rem);font-weight:900;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,var(--light) 0%,var(--prime) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;transform:translateZ(30px);animation:textGlow 3s ease-in-out infinite alternate}
-    @keyframes textGlow{0%{filter:brightness(1)}100%{filter:brightness(1.2)}}
-    .hero p{color:var(--grey);font-size:1.1rem;max-width:650px;margin:0 auto 30px;transform:translateZ(20px)}
-    .btn-primary{padding:18px 40px;border-radius:50px;font-size:1.1rem;font-weight:700;display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--prime) 0%,var(--second) 100%);color:var(--light);box-shadow:var(--shadow),0 0 30px rgba(255,107,53,0.3);position:relative;overflow:hidden;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);transform:translateZ(40px);border:none;cursor:pointer}
-    .btn-primary::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.4),transparent);transform:rotate(45deg);animation:shine 2.5s infinite}
-    @keyframes shine{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
-    .btn-primary:hover{transform:translateZ(60px) translateY(-5px) scale(1.05);box-shadow:var(--shadow-hover),0 0 40px rgba(255,107,53,0.5)}
-    .trust-badges{display:flex;justify-content:center;gap:25px;margin-top:40px;flex-wrap:wrap;transform:translateZ(10px)}
-    .badge{display:flex;align-items:center;gap:10px;color:var(--grey);font-size:0.85rem;background:var(--card-bg);padding:8px 14px;border-radius:20px;backdrop-filter:var(--glass);border:1px solid rgba(255,255,255,0.1);transition:all 0.3s}
-    .badge:hover{transform:translateY(-3px);border-color:var(--accent)}
-    .badge i{color:var(--accent)}
-    .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);text-align:center;margin-bottom:15px;background:linear-gradient(135deg,var(--light) 0%,var(--prime) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .subtitle{text-align:center;color:var(--grey);margin-bottom:50px;font-size:1rem}
-    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin-top:40px}
-    .card{background:var(--card-bg);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:25px;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);backdrop-filter:var(--glass);transform:perspective(1000px) rotateX(0deg) rotateY(0deg);position:relative;overflow:hidden}
-    .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(255,107,53,0.1),transparent);opacity:0;transition:opacity 0.3s;z-index:-1}
-    .card:hover{transform:perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-8px) scale(1.02);border-color:var(--prime);box-shadow:var(--shadow-hover)}
-    .card:hover::before{opacity:1}
-    .card-icon{width:60px;height:60px;background:linear-gradient(135deg,var(--prime),var(--accent));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--light);margin-bottom:20px;transition:transform 0.3s}
-    .card:hover .card-icon{transform:scale(1.1) rotateZ(10deg)}
-    .card h3{margin-bottom:10px;font-size:1.1rem;font-weight:600}
-    .card p{color:var(--grey);font-size:0.9rem;line-height:1.5}
-    .feedback-scroll{position:relative;height:300px;overflow:hidden;margin-top:40px}
-    .feedback-track{display:flex;gap:25px;animation:scroll 8s linear infinite}
-    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .feedback-card{flex:0 0 320px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:25px;backdrop-filter:var(--glass);transition:all 0.3s}
-    .feedback-card:hover{transform:translateY(-5px);border-color:var(--accent)}
-    .feedback-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-    .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--prime),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--light);font-size:1.1rem}
-    .info strong{font-size:0.95rem}
-    .info small{color:var(--grey);font-size:0.75rem}
-    .stars{color:var(--accent);font-size:0.85rem;margin-bottom:8px}
-    .feedback-text{font-size:0.85rem;color:var(--grey);line-height:1.5}
-    .stack-scroll{position:relative;height:600px;margin-top:50px;perspective:1000px}
-    .stack-card{position:absolute;width:100%;max-width:500px;left:50%;transform:translateX(-50%) translateZ(0);background:var(--card-bg);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);backdrop-filter:var(--glass)}
-    .stack-card:nth-child(1){top:0;z-index:4;transform:translateX(-50%) translateZ(60px)}
-    .stack-card:nth-child(2){top:40px;z-index:3;transform:translateX(-50%) translateZ(40px)}
-    .stack-card:nth-child(3){top:80px;z-index:2;transform:translateX(-50%) translateZ(20px)}
-    .stack-card:nth-child(4){top:120px;z-index:1;transform:translateX(-50%) translateZ(0px)}
-    .stack-card:hover{transform:translateX(-50%) translateZ(80px) translateY(-10px);border-color:var(--prime)}
-    .need-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:15px;font-size:0.85rem}
-    .need-grid .yes{color:var(--accent);font-weight:600}
-    .need-grid .no{color:var(--prime);font-weight:600}
-    .bonus-list{list-style:none;margin-top:20px;font-size:0.9rem;color:var(--grey)}
-    .bonus-list li{margin-bottom:10px;display:flex;align-items:center;gap:10px;transition:transform 0.2s}
-    .bonus-list li:hover{transform:translateX(5px);color:var(--light)}
-    .wa-float{position:fixed;bottom:30px;right:30px;width:60px;height:60px;border-radius:50%;background:var(--accent);color:var(--dark);display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3);z-index:999;transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);animation:pulse 2s infinite}
-    @keyframes pulse{0%{box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3)}50%{box-shadow:var(--shadow),0 0 40px rgba(74,222,128,0.6)}100%{box-shadow:var(--shadow),0 0 20px rgba(74,222,128,0.3)}}
-    .wa-float:hover{transform:scale(1.15) rotateZ(10deg);animation:none}
-    footer{background:#111;padding:40px 0;text-align:center;color:var(--grey);font-size:0.85rem}
-    footer a{color:var(--prime);transition:color 0.3s}
-    footer a:hover{color:var(--accent)}
-    /* MOBILE OPTIMIZATIONS - Reduced spacing */
-    @media(max-width:768px){
-      section{padding:50px 0} /* Reduced from 80px */
-      .hero{min-height:auto;padding:100px 0 60px} /* Compact hero */
-      .hero h1{font-size:2.2rem;margin-bottom:15px}
-      .hero p{font-size:1rem;margin-bottom:25px}
-      .grid-3{grid-template-columns:1fr;gap:20px;margin-top:30px} /* Tighter gaps */
-      .card{padding:20px} /* Compact cards */
-      .card-icon{width:50px;height:50px;font-size:1.4rem;margin-bottom:15px}
-      .section-title{font-size:2rem;margin-bottom:10px}
-      .subtitle{margin-bottom:30px;font-size:0.9rem}
-      .feedback-scroll{height:280px;margin-top:30px}
-      .feedback-card{flex:0 0 280px;padding:20px}
-      .stack-scroll{height:500px;margin-top:30px} /* Reduced height */
-      .need-grid{grid-template-columns:1fr;gap:15px}
-      .btn-primary{padding:15px 30px;font-size:0.95rem}
-      .trust-badges{gap:15px;margin-top:30px}
-      .badge{font-size:0.75rem;padding:6px 12px}
-      .logo{font-size:1.4rem}
-      .nav-links{display:none}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ====== AURORA & MATHEMATICAL BACKGROUND ====== */
+    .aurora-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(57, 255, 20, 0.05) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 70%, rgba(0, 255, 255, 0.05) 0%, transparent 40%),
+        linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+      animation: auroraPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes auroraPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .math-symbols {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .math-symbol {
+      position: absolute;
+      font-size: 2rem;
+      color: rgba(57, 255, 20, 0.05);
+      animation: float 20s infinite linear;
+      font-weight: 900;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+      100% { transform: translateY(-100px) translateX(50px) rotate(360deg); }
+    }
+
+    /* ====== GRID LINES ====== */
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: 
+        linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+    }
+
+    /* ====== GLASSMORPHIC NAV ====== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px) saturate(180%);
+      border-bottom: var(--glass-border);
+      z-index: 1000;
+      padding: 18px 0;
+      transition: all 0.3s;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--neon-green);
+      text-shadow: var(--shadow-neon);
+      transition: all 0.3s;
+    }
+
+    .logo:hover {
+      animation: neonFlicker 1.5s infinite alternate;
+    }
+
+    @keyframes neonFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-green);
+      transform: translateY(-2px);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--neon-green);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ====== HERO - KINETIC TYPOGRAPHY ====== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 120px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 0 20px;
+      transform: translateZ(50px);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: kineticType 2s ease-out;
+      letter-spacing: -2px;
+      position: relative;
+    }
+
+    @keyframes kineticType {
+      0% {
+        opacity: 0;
+        transform: translateZ(-100px) translateY(50px) rotateX(-45deg);
+        letter-spacing: 20px;
+      }
+      100% {
+        opacity: 1;
+        transform: translateZ(0) translateY(0) rotateX(0);
+        letter-spacing: -2px;
+      }
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ====== NEON BUTTON WITH BREATHING GLOW ====== */
+    .btn-primary {
+      padding: 20px 50px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: linear-gradient(135deg, var(--neon-green), rgba(57, 255, 20, 0.8));
+      color: var(--bg-primary);
+      border: 2px solid var(--neon-green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: breathingGlow 2s ease-in-out infinite;
+      box-shadow: var(--shadow-neon);
+    }
+
+    @keyframes breathingGlow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(57, 255, 20, 0.8);
+      }
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 0 50px rgba(57, 255, 20, 0.9);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 1s both;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      background: var(--glass-bg);
+      padding: 10px 20px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      border: var(--glass-border);
+      transition: all 0.3s;
+    }
+
+    .badge:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-green);
+      box-shadow: var(--shadow-neon);
+    }
+
+    /* ====== GLASSMORPHIC SECTIONS ====== */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 70px;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    /* Scroll reveal animation class */
+    .reveal {
+      animation: revealElement 0.6s ease-out forwards;
+    }
+
+    @keyframes revealElement {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ====== 3D GLASS CARDS ====== */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-top: 50px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      border-radius: var(--radius);
+      padding: 35px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px) rotateX(10deg);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.1), transparent);
+      transition: 0.6s;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card.reveal {
+      animation: revealCard 0.6s ease-out forwards;
+    }
+
+    @keyframes revealCard {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      border-color: var(--neon-green);
+      box-shadow: var(--shadow-neon), var(--shadow-card);
+    }
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-teal));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--bg-primary);
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+      box-shadow: var(--shadow-neon);
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1) rotateZ(10deg);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ====== FAST FEEDBACK SCROLL ====== */
+    .feedback-scroll {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .feedback-track {
+      display: flex;
+      gap: 30px;
+      animation: scroll 8s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .feedback-card {
+      flex: 0 0 340px;
+      background: var(--glass-bg);
+      border: var(--glass-border);
+      border-radius: var(--radius);
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .feedback-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyber-teal);
+      box-shadow: var(--shadow-teal);
+    }
+
+    .feedback-head {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-green), var(--cyber-teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--bg-primary);
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-neon);
+    }
+
+    .info strong {
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .info small {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    .stars {
+      color: var(--neon-green);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      text-shadow: var(--shadow-neon);
+    }
+
+    .feedback-text {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ====== PROGRESSIVE COUNTERS ====== */
+    .counter {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--neon-green);
+      text-shadow: var(--shadow-neon);
+      display: inline-block;
+    }
+
+    /* ====== WHATSAPP FLOAT ====== */
+    .wa-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      color: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: var(--shadow-neon);
+      z-index: 999;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: var(--shadow-neon);
+      }
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(57, 255, 20, 0.8);
+      }
+    }
+
+    .wa-float:hover {
+      transform: scale(1.15) rotateZ(10deg);
+      animation: none;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--bg-secondary);
+      padding: 50px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: var(--glass-border);
+    }
+
+    footer a {
+      color: var(--neon-green);
+      transition: all 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--cyber-teal);
+      text-shadow: var(--shadow-teal);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .hero { padding: 100px 0 60px; min-height: auto; }
+      .hero h1 { font-size: 2.5rem; }
+      .grid-3 { grid-template-columns: 1fr; gap: 25px; }
+      .card { padding: 25px; }
+      .feedback-card { flex: 0 0 280px; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
-<body data-theme="dark">
-  <div class="bg-animate"></div>
+<body>
+  <!-- ====== BACKGROUND ELEMENTS ====== -->
+  <div class="aurora-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="math-symbols">
+    <div class="math-symbol" style="top: 10%; left: 5%; animation-delay: 0s;">∑</div>
+    <div class="math-symbol" style="top: 20%; left: 85%; animation-delay: 3s;">∞</div>
+    <div class="math-symbol" style="top: 60%; left: 10%; animation-delay: 5s;">π</div>
+    <div class="math-symbol" style="top: 80%; left: 70%; animation-delay: 7s;">Ω</div>
+    <div class="math-symbol" style="top: 40%; left: 50%; animation-delay: 10s;">∆</div>
+  </div>
 
-  <!-- NAV -->
+  <!-- ====== NAVIGATION ====== -->
   <nav>
-    <div class="container">
-      <div class="nav">
-        <div class="logo">ZeroTo1Crore</div>
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#feedback">Reviews</a>
-          <a href="#stack">Who/Need/Bonus</a>
-          <a href="#cta">Download</a>
-        </div>
-        <div class="nav-cta">
-          <a href="#cta" class="btn-primary">₹299 Only</a>
-        </div>
+    <div class="nav">
+      <div class="logo">ZeroTo1Crore</div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#feedback">Reviews</a>
+        <a href="#stack">Who/Need/Bonus</a>
+        <a href="#cta">Download</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#cta" class="btn-primary">₹299 Only</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ====== HERO SECTION ====== -->
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
-        <img src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png" alt="Zero to 1 Crore Book" style="width:240px;border-radius:20px;margin-bottom:25px;box-shadow:var(--shadow);transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05) rotateY(5deg)'" onmouseout="this.style.transform='scale(1) rotateY(0deg)'">
-        <h1>Zero to 1 Crore<br>in 150 Days</h1>
-        <p>The ultimate step-by-step blueprint to build your online empire from scratch. No experience, no big budget—just proven systems that print money.</p>
-        <div class="hero-cta">
+        <img src="https://i.ibb.co/VPs7zWc/Chat-GPT-Image-Jan-12-2026-08-56-44-PM-768x512.png" alt="Zero to 1 Crore Book" style="width:240px;border-radius:20px;margin-bottom:25px;box-shadow:var(--shadow-neon);transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h1 class="reveal">Zero to 1 Crore<br>in 150 Days</h1>
+        <p class="reveal">The ultimate step-by-step blueprint to build your online empire from scratch. No experience, no big budget—just proven systems that print money.</p>
+        <div class="hero-cta reveal">
           <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="btn-primary track-wa">
             <i class="fab fa-whatsapp"></i>
             Buy Now - ₹299
           </a>
         </div>
-        <div class="trust-badges">
+        <div class="trust-badges reveal">
           <div class="badge"><i class="fas fa-check-circle"></i> Instant PDF</div>
           <div class="badge"><i class="fas fa-check-circle"></i> 210+ Scripts</div>
           <div class="badge"><i class="fas fa-check-circle"></i> 24-hr Refund</div>
@@ -146,23 +649,23 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
+  <!-- ====== FEATURES ====== -->
   <section id="features">
     <div class="container">
-      <h2 class="section-title">What’s Inside?</h2>
-      <p class="subtitle">Everything you need to hit ₹1 crore in 150 days</p>
+      <h2 class="section-title reveal">What’s Inside?</h2>
+      <p class="subtitle reveal">Everything you need to hit ₹1 crore in 150 days</p>
       <div class="grid-3">
-        <div class="card">
+        <div class="card reveal">
           <div class="card-icon"><i class="fas fa-rocket"></i></div>
           <h3>20+ Income Streams</h3>
           <p>Affiliate, YouTube, POD, KDP, SaaS resell, AI services—step-by-step.</p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <div class="card-icon"><i class="fas fa-brain"></i></div>
           <h3>AI Automation</h3>
           <p>Done-for-you prompts & tools that run 80% of your business on autopilot.</p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
           <h3>Mobile First</h3>
           <p>Build everything from your phone. No laptop, no team, no capital.</p>
@@ -171,81 +674,81 @@
     </div>
   </section>
 
-  <!-- FEEDBACK SCROLL (8s speed) -->
+  <!-- ====== FEEDBACK SCROLL ====== -->
   <section id="feedback">
     <div class="container">
-      <h2 class="section-title">Reader Results</h2>
-      <p class="subtitle">Real feedback from early buyers</p>
+      <h2 class="section-title reveal">Reader Results</h2>
+      <p class="subtitle reveal">Real feedback from early buyers</p>
       <div class="feedback-scroll">
         <div class="feedback-track">
           <!-- 13 feedback cards -->
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Ankit Sharma</strong><small>Student, 19</small></div></div>
             <div class="feedback-text">"Day 14 me hi first ₹11,500 affiliate sale close ho gaya. WhatsApp scripts kaam kar gaye!"</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">P</div><div class="info"><strong>Priya Patel</strong><small>Freelancer, 24</small></div></div>
             <div class="feedback-text">"YouTube automation chapter ne 30 din me 52k views + ₹27k AdSense. Faceless channel live!"</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">R</div><div class="info"><strong>Rahul Verma</strong><small>9-5 Employee, 28</small></div></div>
             <div class="feedback-text">"Side hustle ab ₹1.2L/month. 150-day planner ne discipline pakka kar diya."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">S</div><div class="info"><strong>Sneha Singh</strong><small>Creator, 22</small></div></div>
             <div class="feedback-text">"KDP + POD combo = ₹89k in 60 days. Bina face dikhaye income ho rahi hai."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">N</div><div class="info"><strong>Nitin Gupta</strong><small>Solopreneur, 31</small></div></div>
             <div class="feedback-text">"AI services chapter ne client rate 5x kar diya. Same effort, 5x money."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">K</div><div class="info"><strong>Kavita Desai</strong><small>Housewife, 35</small></div></div>
             <div class="feedback-text">"Mobile se hi ₹45k first month. Bacche sote hi kaam shuru. Freedom milegi!"</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">M</div><div class="info"><strong>Manish Joshi</strong><small>Student, 21</small></div></div>
             <div class="feedback-text">"Affiliate + email combo = ₹78k in 45 days. Scripts copy-paste kaam kar gaye."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">T</div><div class="info"><strong>Tanya Malik</strong><small>Freelancer, 26</small></div></div>
             <div class="feedback-text">"Print-on-demand ne ₹1.1L in 50 days. Designs bina face ke viral ho gaye."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Arjun Reddy</strong><small>Job Person, 29</small></div></div>
             <div class="feedback-text">"Side income now exceeds salary. Resignation letter ready hai!"</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">D</div><div class="info"><strong>Diya Kapoor</strong><small>Creator, 23</small></div></div>
             <div class="feedback-text">"Newsletter monetization = ₹62k monthly. 2,400 subscribers in 60 days!"</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">V</div><div class="info"><strong>Vikram Sethi</strong><small>Business Owner, 33</small></div></div>
             <div class="feedback-text">"AI automation saved 20 hours/week. Same revenue, zero burnout."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">P</div><div class="info"><strong>Pooja Bansal</strong><small>Student, 20</small></div></div>
             <div class="feedback-text">"First ₹1 lakh in 90 days. Parents ko bharosa ho gaya online earning pe."</div>
           </div>
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">R</div><div class="info"><strong>Rohan Mehta</strong><small>Solopreneur, 27</small></div></div>
             <div class="feedback-text">"Multiple streams now = ₹2.3L/month. 150-day roadmap followed exactly."</div>
           </div>
           <!-- duplicate for infinite scroll -->
-          <div class="feedback-card">
+          <div class="feedback-card reveal">
             <div class="stars">★★★★★</div>
             <div class="feedback-head"><div class="avatar">A</div><div class="info"><strong>Ankit Sharma</strong><small>Student, 19</small></div></div>
             <div class="feedback-text">"Day 14 me hi first ₹11,500 affiliate sale close ho gaya. WhatsApp scripts kaam kar gaye!"</div>
@@ -255,83 +758,111 @@
     </div>
   </section>
 
-  <!-- WHO SECTION -->
+  <!-- ====== WHO SECTION ====== -->
   <section id="who">
     <div class="container">
-      <h2 class="section-title">Who This Is For</h2>
+      <h2 class="section-title reveal">Who This Is For</h2>
       <div class="grid-3">
-        <div class="card"><div class="card-icon"><i class="fas fa-user-graduate"></i></div><h3>Students</h3><p>Earn without depending on degrees.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-briefcase"></i></div><h3>9-5 Employees</h3><p>Looking for a clear exit plan.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-laptop"></i></div><h3>Freelancers</h3><p>Tired of low-paying clients.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-clock"></i></div><h3>Side Hustlers</h3><p>Ready to go full-time.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-mask"></i></div><h3>Creators</h3><p>Monetize without showing face.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-user-tie"></i></div><h3>Solopreneurs</h3><p>Need repeatable systems for growth.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-user-graduate"></i></div><h3>Students</h3><p>Earn without depending on degrees.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-briefcase"></i></div><h3>9-5 Employees</h3><p>Looking for a clear exit plan.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-laptop"></i></div><h3>Freelancers</h3><p>Tired of low-paying clients.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-clock"></i></div><h3>Side Hustlers</h3><p>Ready to go full-time.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-mask"></i></div><h3>Creators</h3><p>Monetize without showing face.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-user-tie"></i></div><h3>Solopreneurs</h3><p>Need repeatable systems for growth.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- DON'T NEED -->
+  <!-- ====== DON'T NEED ====== -->
   <section id="dont">
     <div class="container">
-      <h2 class="section-title">You DON’T Need</h2>
+      <h2 class="section-title reveal">You DON’T Need</h2>
       <div class="grid-3">
-        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Fancy Tools</h3><p>Basic phone + free apps = enough.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Paid Ads</h3><p>Organic traffic systems inside.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Funding</h3><p>Start with ₹0 capital.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Big Teams</h3><p>Solo friendly – AI + automation.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Followers</h3><p>Zero audience needed.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Fancy Tools</h3><p>Basic phone + free apps = enough.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Paid Ads</h3><p>Organic traffic systems inside.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Funding</h3><p>Start with ₹0 capital.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Big Teams</h3><p>Solo friendly – AI + automation.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-times"></i></div><h3>Followers</h3><p>Zero audience needed.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ONLY NEED -->
+  <!-- ====== ONLY NEED ====== -->
   <section id="only">
     <div class="container">
-      <h2 class="section-title">You ONLY Need</h2>
+      <h2 class="section-title reveal">You ONLY Need</h2>
       <div class="grid-3">
-        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>Focus</h3><p>1 hour daily implementation.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>A Smartphone</h3><p>Or any basic laptop.</p></div>
-        <div class="card"><div class="card-icon"><i class="fas fa-check"></i></div><h3>This Roadmap</h3><p>Step-by-step system inside.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-check"></i></div><h3>Focus</h3><p>1 hour daily implementation.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-check"></i></div><h3>A Smartphone</h3><p>Or any basic laptop.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-check"></i></div><h3>This Roadmap</h3><p>Step-by-step system inside.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- BONUS -->
+  <!-- ====== DIFFERENT ====== -->
+  <section id="different">
+    <div class="container">
+      <h2 class="section-title reveal">Why This Book Is DIFFERENT</h2>
+      <div class="grid-3">
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-star"></i></div><h3>100% Strategy + Execution</h3><p>Each chapter = mini course.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-tools"></i></div><h3>Ready-to-Use Tools</h3><p>Copy-paste templates inside.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-map"></i></div><h3>Plug-and-Play Maps</h3><p>Action planners included.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== BONUS ====== -->
   <section id="bonus">
     <div class="container">
-      <h2 class="section-title">BONUS PACK (LIMITED TIME ONLY)</h2>
-      <ul class="bonus-list">
-        <li>🎁 Execution Toolkit Vault</li>
-        <li>🎁 150-Day Business Planner (Printable PDF)</li>
-        <li>🎁 Money Mindset Journal Template</li>
-        <li>🎁 Cold DM & Sales Scripts (Proven to convert!)</li>
-        <li>🎁 ₹0-to-₹1L Launch Tracker (Notion dashboard)</li>
-        <li>🎁 Business Model Chooser (AI-powered)</li>
+      <h2 class="section-title reveal">BONUS PACK <span style="color: var(--neon-green);">(LIMITED TIME ONLY)</span></h2>
+      <ul class="bonus-list" style="list-style:none;margin-top:30px;font-size:1rem;color:var(--text-secondary);max-width:600px;margin-left:auto;margin-right:auto;">
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 Execution Toolkit Vault</li>
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 150-Day Business Planner (Printable PDF)</li>
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 Money Mindset Journal Template</li>
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 Cold DM & Sales Scripts (Proven to convert!)</li>
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 ₹0-to-₹1L Launch Tracker (Notion dashboard)</li>
+        <li style="margin-bottom:15px;display:flex;align-items:center;gap:12px;transition:all 0.3s;" onmouseover="this.style.color='var(--neon-green)';this.style.transform='translateX(10px)'" onmouseout="this.style.color='var(--text-secondary)';this.style.transform='translateX(0)'">🎁 Business Model Chooser (AI-powered)</li>
       </ul>
-      <div style="text-align:center;margin-top:30px">
-        <a href="#cta" class="btn-primary">Claim Bonuses - ₹299</a>
+      <div style="text-align:center;margin-top:40px;">
+        <a href="#cta" class="btn-primary reveal">Claim Bonuses - ₹299</a>
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section id="cta" class="cta-section">
+  <!-- ====== PROMISE ====== -->
+  <section id="promise">
     <div class="container">
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);margin-bottom:15px;">Ready to Build Your ₹1 Crore Empire?</h2>
-      <p style="font-size:1.1rem;color:var(--grey);margin-bottom:25px;">Limited copies at ₹299. Price increases to ₹1,999 at midnight.</p>
-      <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="btn-primary track-wa">
+      <h2 class="section-title reveal">THE PROMISE</h2>
+      <p class="subtitle reveal">If you read & implement 1 hour/day, you WILL:</p>
+      <div class="grid-3">
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-rocket"></i></div><h3>Launch First Business</h3><p>Within 30 days.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-sync"></i></div><h3>Build Recurring Income</h3><p>Monthly cashflow systems.</p></div>
+        <div class="card reveal"><div class="card-icon"><i class="fas fa-brain"></i></div><h3>Upgrade Mindset</h3><p>No-excuses mentality.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <a href="#cta" class="btn-primary reveal">Start Now - ₹299</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FINAL CTA ====== -->
+  <section id="cta" style="background:linear-gradient(135deg,rgba(57,255,20,0.05),transparent);padding:100px 0;">
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title reveal" style="background:linear-gradient(135deg,var(--neon-green),var(--cyber-teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Ready to Build Your ₹1 Crore Empire?</h2>
+      <p class="subtitle reveal" style="font-size:1.2rem;margin-bottom:30px;">Limited copies at ₹299. Price increases to ₹1,999 at midnight.</p>
+      <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="btn-primary reveal track-wa" style="font-size:1.2rem;padding:25px 60px;">
         <i class="fab fa-whatsapp"></i>
         Buy Now - ₹299
       </a>
     </div>
   </section>
 
-  <!-- WHATSAPP FLOAT -->
+  <!-- ====== WHATSAPP FLOAT ====== -->
   <a href="https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link." class="wa-float track-wa">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- FOOTER -->
+  <!-- ====== FOOTER ====== -->
   <footer>
     <div class="container">
       <p>&copy; 2024 Hifzurrahman. All rights reserved. | WhatsApp Support: <a href="https://wa.me/917258055245">7258055245</a></p>
@@ -339,29 +870,83 @@
   </footer>
 
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    // ====== SCROLL REVEAL ANIMATIONS ======
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ====== PARALLAX EFFECT ======
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.math-symbol');
+      
+      parallaxElements.forEach((el, index) => {
+        const speed = 0.5 + (index * 0.1);
+        el.style.transform = `translateY(${scrolled * speed}px)`;
       });
     });
-    
-    // Auto redirect after 7 seconds
-    setTimeout(()=>{
-      window.open('https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link.','_blank');
-    },7000);
-    
-    // Navbar scroll effect
-    window.addEventListener('scroll',()=>{
-      const nav=document.querySelector('nav');
-      if(window.scrollY>100){
-        nav.style.background='rgba(10,10,11,0.9)';
-        nav.style.backdropFilter='blur(20px)';
-      }else{
-        nav.style.background='rgba(10,10,11,0.7)';
+
+    // ====== PROGRESSIVE COUNTERS (if needed) ======
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      
+      function updateCounter() {
+        start += increment;
+        if (start < target) {
+          element.textContent = Math.floor(start) + '+';
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = target + '+';
+        }
       }
+      
+      updateCounter();
+    }
+
+    // Example: If you add a counter later
+    // const counterObserver = new IntersectionObserver((entries) => {
+    //   entries.forEach(entry => {
+    //     if (entry.isIntersecting) {
+    //       const counter = entry.target.querySelector('.counter');
+    //       if (counter) animateCounter(counter, 150);
+    //       counterObserver.unobserve(entry.target);
+    //     }
+    //   });
+    // });
+
+    // ====== SMOOTH SCROLL ======
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
     });
+
+    // ====== AUTO REDIRECT ======
+    setTimeout(() => {
+      window.open('https://wa.me/917258055245?text=Hi%20Hifzurrahman,%20I%20want%20to%20buy%20Zero%20to%201%20Crore%20blueprint%20for%20Rs%20299.%20Please%20send%20payment%20link.', '_blank');
+    }, 7000);
   </script>
 </body>
 </html>
